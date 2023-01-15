@@ -33,5 +33,20 @@ namespace TestProject2
             string result = addressBook1.RetrieveEntriesFromAddressBookDB();
             Assert.AreEqual("Retrive Data Successfull", result);
         }
+        [TestMethod]
+        public void UpdateDataInDB(AddressBook address)
+        {
+            AddressBook address1 = new AddressBook
+            {
+                FirstName = "Shreeram",
+
+                Address = "Mumbai",
+
+                MobNo = 987654322
+
+            };
+            string result = addressBook1.UpdateDataInDB(address1);
+            Assert.AreEqual("Contact Updated Successfully", result);
+        }
     }
 }

@@ -109,6 +109,40 @@ namespace AddressBook_ADO_Test_Case
             }
             return null;
         }
+        public string UpdateDataInDB(AddressBook address)
+        {
+            SqlConnection sqlconnection = new SqlConnection(connectionString);
+            try
+            {
+                using (sqlconnection)
+                {
+                    sqlconnection.Open();
+                    SqlCommand command = new SqlCommand("SPUpdateDataInDB", sqlconnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.CommandType = CommandType.StoredProcedure;
+                    command.Parameters.AddWithValue("@FirstName", address.FirstName);
+                    command.Parameters.AddWithValue("@Address", address.Address);
+                    command.Parameters.AddWithValue("@MobNo", address.MobNo);
+                    int result = command.ExecuteNonQuery();
+                    sqlconnection.Close();
+                    if (result >= 1)
+                    {
+
+                        Console.WriteLine("AddressBook Data Updated Successfully");
+                        return "Updated Succesfully";
+                    }
+                    else
+                        Console.WriteLine("No DataBase found");
+                    return "Not-Updated Succesfully";
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
         public static void Main(string[]args)
         {
 
