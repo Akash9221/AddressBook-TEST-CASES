@@ -48,5 +48,11 @@ namespace TestProject2
             string result = addressBook1.UpdateDataInDB(address1);
             Assert.AreEqual("Contact Updated Successfully", result);
         }
+        [TestMethod]
+        public void DeleteDataFromDatabase(string name)
+        {
+            string result = addressBook1.DeleteDataFromDatabase("Akash");
+            Assert.AreEqual("Contact Delete Successfully", result);
+        }
     }
 }
