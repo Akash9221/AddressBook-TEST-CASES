@@ -27,6 +27,11 @@ namespace TestProject2
             string result = addressBook1.TestAddAddressBookInDB(address1);
             Assert.AreEqual("Saved", result);
         }
-       
+        [TestMethod]
+        public void RetrieveEntriesFromAddressBookDB()
+        {
+            string result = addressBook1.RetrieveEntriesFromAddressBookDB();
+            Assert.AreEqual("Retrive Data Successfull", result);
+        }
     }
 }

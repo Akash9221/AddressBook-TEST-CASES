@@ -54,7 +54,61 @@ namespace AddressBook_ADO_Test_Case
             }
             return null;
         }
-      
+        public string RetrieveEntriesFromAddressBookDB()
+        {
+            SqlConnection sqlConnection = new SqlConnection(connectionString);
+            try
+            {
+                List<AddressBook> addressBooks = new List<AddressBook>();
+                using (sqlConnection)
+                {
+                    sqlConnection.Open();
+                    SqlCommand command = new SqlCommand("SPRetrieveAllDetails", sqlConnection);
+                    command.CommandType = CommandType.StoredProcedure;
+                    SqlDataReader dr = command.ExecuteReader();
+                    if (dr.HasRows)
+                    {
+                        while (dr.Read())
+                        {
+                            AddressBook addressBook = new AddressBook();
+                            addressBook.FirstName = dr.GetString(0);
+                            addressBook.LastName = dr.GetString(1);
+                            addressBook.Address = dr.GetString(2);
+                            addressBook.City = dr.GetString(3);
+                            addressBook.State = dr.GetString(4);
+                            addressBook.Zip = dr.GetInt32(5);
+                            addressBook.MobNo = dr.GetInt32(6);
+                            addressBook.Email = dr.GetString(7);
+                            addressBook.Type = dr.GetString(8);
+                            addressBook.AddressBookName = dr.GetString(9);
+                            Console.WriteLine("FirstName" + addressBook.FirstName);
+                            Console.WriteLine("LastName" + addressBook.LastName);
+                            Console.WriteLine("Address" + addressBook.Address);
+                            Console.WriteLine("City" + addressBook.City);
+                            Console.WriteLine("State" + addressBook.State);
+                            Console.WriteLine("Zip" + addressBook.Zip);
+                            Console.WriteLine("MobNo" + addressBook.MobNo);
+                            Console.WriteLine("Email" + addressBook.Email);
+                            Console.WriteLine("Type" + addressBook.Type);
+                            Console.WriteLine("AddressBookName" + addressBook.AddressBookName);
+                            Console.WriteLine("---------------------------------------------------------------------------------------------");
+                        }
+
+                    }
+                    else
+                    {
+                        Console.WriteLine("No Database Found");
+
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                // handle exception here
+                Console.WriteLine(ex.Message);
+            }
+            return null;
+        }
         public static void Main(string[]args)
         {
 
